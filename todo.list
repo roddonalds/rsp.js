@@ -1,0 +1,9 @@
+
+// My intent is to create a dbus like api with node.js.
+// I have the code API designed of Server and Client instances but I dont write the source code.
+// I will provie you with 2 files.
+// - first is socketServerInstance.js class from class DesktopSocket.Server();
+// - second is socketClientInstance.js class from class DesktopSocket.Client()
+// ... with maestry, abstract this into full and functional source code; 
+// *** no need to cache the connections inside an array;
+

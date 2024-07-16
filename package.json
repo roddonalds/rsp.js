@@ -1,0 +1,89 @@
+{
+  
+  "name": "rsp.js",
+  
+  "version": "1.0.0",
+  
+  "description": "@rsp Operational System node.js library",
+  
+  "main": "index.js",
+  
+  "scripts": {
+  
+    
+  "dev": "NODE_ENV=development npm run serve && electron . --remote-allow-origins=* --watch",
+  
+    
+  "start": "NODE_ENV=production npm run serve && electron . --remote-allow-origins=* --watch",
+  
+    
+  "serve": "nodemon example/dsocket.io/socketServer.js",
+  
+    
+  "dev:su": "sudo electron ./example/main.js --no-sandbox",
+  
+    
+  "set:ip": "sudo ip address add dev lo 14.21.7.1",
+  
+    
+  "git:up": "git add .; git commit -m up; git push",
+  
+    
+  "inst": "killall -9 rsp.appman; sudo apt remove rsp.appman -y --purge; sudo dpkg -i dist/rsp.appman_1.0.2_amd64.deb || true",
+  
+    
+  "postinstall-10": "electron-builder install-app-deps",
+  
+    
+  "postinstall-ll": "sudo mv -f /opt/rsp.appman/rsp.appman /opt/rsp.appman/rsp.appman.bin",
+  
+    
+  "postinstall-13": "sudo cp -rf ./bin.wrapper.bash /opt/rsp.appman/rsp.appman",
+  
+    
+  "postinstall": "npm run postinstall-10; npm run postinstall-ll; npm run postinstall-13",
+  
+    
+  "release": "npm run dist && npm run inst && npm run postinstall",
+  
+    
+  "reload:deps": "rm -rf node_modules; rm package-lock.json; npm install; npm audit fix --force; npm audit fix; npm install; npm rebuild",
+  
+    
+  "version:up": "bash ./.dev/versionUp.sh",
+  
+    
+  "test": "nodemon ./test/index.js"
+  
+  },
+  
+  "repository": {
+  
+    
+  "type": "git",
+  
+    
+  "url": "git+ssh://git@github.com/roddonalds/rsp.js.git"
+  
+  },
+  
+  "author": "ropsoft",
+  
+  "license": "ISC",
+  
+  "bugs": {
+  
+    
+  "url": "https://github.com/roddonalds/rsp.js/issues"
+  
+  },
+  
+  "homepage": "https://github.com/roddonalds/rsp.js#readme",
+  
+  "dependencies": {
+  
+    
+  "shelljs": "^0.8.5"
+  
+  }
+}
