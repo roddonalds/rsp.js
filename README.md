@@ -15,7 +15,7 @@ It provides a robust framework for handling events, managing workers, and facili
 - ServiceSocket Management: Easily create and manage ServiceSocket instances.
 - Worker and Client Communication: Efficiently handle worker and client interactions through TCP.
 - Event Broadcasting: Broadcast events from workers to all connected clients.
-- Dynamic Routing: Supports dynamic routing of ServiceSocket instances without specifying address/port for each instance.
+- Dynamic Routing: Supports dynamic routing of ServiceSocket;no need to set address/port for each instance.
 - Installation of services and IPC facilited by clear .js API.
 - Integration with electron.js apps and electro-packager.
 
