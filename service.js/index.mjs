@@ -1,12 +1,9 @@
-import { EventEmitter } from 'events';
 import { Worker } from 'worker_threads';
+import { EventEmitter } from 'events';
 
 import connect from './connect.mjs';
 import functionn from './function.mjs'
 import initialize from './initialize.mjs';
-import setupEventHandlers from './setupEventHandlers.mjs';
-
-import { socketObjectParse } from '../Utils.js/index.mjs';
 
 function Service (options) {
 
@@ -44,13 +41,13 @@ function Service (options) {
 
 Service.prototype.worker = function (_worker) {
 
-    console.debug('Adding worker:', _worker);
+    console.warn('Adding worker:', _worker);
 
     if (!_worker.id) {
         throw new Error('Worker must have an id');
     }
 
-    console.debug('Creating worker:', _worker);
+    console.warn('Creating worker:', _worker);
 
     let __worker = new Worker(_worker.work, {
         workerData: _worker.data
@@ -85,22 +82,6 @@ Service.prototype.event = function (event, description) {
     
     console.debug('Registering event:', event);
     console.debug('Event description:', description);
-
-    this.on(event, (data) => {
-        
-        // console.warn('Worker event received', event)
-        // console.warn(description)
-        // console.debug('data', data)
-
-        // this.connections.forEach(con => {
-        //     console.log('this.connections.forEach(con')
-        //     //console.debug('con', con)
-        //     //console.debug('con.socket', con.socket)
-        //     //con.socket.emit('message', 'trembala')((
-
-        //     console.log(con.socket)
-        // })
-    })
 
     this.events.push({
         event,
