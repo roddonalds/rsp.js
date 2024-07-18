@@ -47,12 +47,27 @@ export default function (options) {
 
             socket.on('data', (_data) => {
 
+                _data = Buffer.from(_data, 'base64').toString('ascii');
                 _data = JSON.parse(_data);
 
-                const evname = _data.evemt,
-                    data = _data.data;
+                let evname = JSON.parse(JSON.stringify(_data))
+                    evname = evname.event;
 
-                socket.handlers[evname](data);
+                console.debug('evname', evname)
+
+                let readyData = {};
+
+                console.log(typeof _data)
+
+                Object.keys(_data).forEach(key => {
+                    console.debug('key', key)
+                    if (key !== 'event') {
+                        readyData[key] = _data[key];
+                    }
+                })
+
+                socket.handlers[evname](readyData);
+
             })
 
             resolve(socket);
