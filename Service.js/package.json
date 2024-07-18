@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "test": "",
+        "test:checkNetwork": "node ./test/checkNetwork.mjs",
+        "test:connectClient": "node ./test/connectClient.mjs"
+    }
+}

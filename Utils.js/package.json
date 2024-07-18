@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "test:termlog": "nodemon ./test/termlog.test.mjs",
+        "test:checkSocketNetwork": "nodemon ./test/checkSocketNetwork.test.mjs"
+    }
+}
