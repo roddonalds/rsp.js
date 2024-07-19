@@ -1,28 +1,17 @@
 import net from 'net';
-import onSocketIngress from './onSocketIngress.mjs';
-import { socketObjectParse } from '../Utils.js/index.mjs';
+import oningress from './oningress.mjs';
 
 export default function (segredo) {
 
     if (!segredo) {
         throw new Error('Segredo is required to initialize the service');
-    }''
+    }
 
     this.segredo = segredo;
 
     this.server = net.createServer(socket => {
 
         console.debug('socket creeated', socket.toString());
-
-        // socket.on('message', data => {
-        //     console.debug('socket.on(message)')
-        //     console.debug('data', data)
-        // })
-
-        // socket.on('custom', (data) => {
-        //     console.debug('socket.on(custom)')
-        //     console.debug('data', data)
-        // })
 
         socket.on('data', (message) => {
 
@@ -41,19 +30,17 @@ export default function (segredo) {
                 return;
             }
 
-            onSocketIngress.call(this, message, socket);
+            oningress.call(this, message, socket);
 
         });
 
     });
 
     this.server.listen(this.port, this.address, () => {
-        
-        this.setupEventHandlers();
-        
-        setInterval(() => {
-            console.log('Connections', this.connections);
-        }, 3 * 9000)
+                
+        // setInterval(() => {
+        //     console.log('Connections', this.connections);
+        // }, 3 * 9000)
         
         console.log('Service listening:', this.address, this.port);
 

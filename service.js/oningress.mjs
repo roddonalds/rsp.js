@@ -2,9 +2,9 @@ export default function (message, socket) {
 
     if (message.event === 'ingress') {
 
-        console.warn('Client ingress:');
-        console.debug('Client:', message.client);
-        console.debug('Service:', message.service);
+        //console.warn('Client ingress:');
+        //console.debug('Client:', message.client);
+        //console.debug('Service:', message.service);
 
         const isAllowed = this.checkAppClientIsAllowed(message.client);
 
@@ -45,7 +45,6 @@ export default function (message, socket) {
         this.connections.push(connection);
         
         //socket.emit('message', connection)
-
         //console.debug('Socket connected:', socketObjectParse(socket));
         //sconsole.debug('Clients:', socketObjectParse(this.clients));
     }
