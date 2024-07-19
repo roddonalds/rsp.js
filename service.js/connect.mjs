@@ -7,8 +7,8 @@ export default function (options) {
     }
 
     const clientName = options.client,
-        serviceName = options.service,
-        serviceSegredo = options.segredo;
+          serviceName = options.service,
+          serviceSegredo = options.segredo;
 
     if (!serviceName) {
         throw new Error('Service name is required');
@@ -25,7 +25,7 @@ export default function (options) {
     return new Promise(resolve => {
 
         const port = 8080,
-            address = '127.0.0.1';
+              address = '127.0.0.1';
 
         let socket = new net.createConnection({ port, address }, () => {
 
@@ -45,6 +45,12 @@ export default function (options) {
                 socket.handlers[ev] = callback;
             }
 
+            socket.send('ingress', {
+                client: clientName,
+                service: serviceName,
+                segredo: serviceSegredo
+            })
+
             socket.on('data', (_data) => {
 
                 _data = Buffer.from(_data, 'base64').toString('ascii');
@@ -52,8 +58,6 @@ export default function (options) {
 
                 let evname = JSON.parse(JSON.stringify(_data))
                     evname = evname.event;
-
-                console.debug('evname', evname)
 
                 let readyData = {};
 

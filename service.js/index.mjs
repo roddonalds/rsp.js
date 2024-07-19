@@ -48,33 +48,24 @@ Service.prototype.work = function (_work) {
         throw new Error('Worker must have an name');
     }
 
-    console.warn('Creating work.script:', _work.script);
+    console.warn('Creating work.path:', _work.path);
 
-    let __work = new Worker(_work.script, {
+    let __work = new Worker(_work.path, {
         workerData: _work.data
     });
 
     let work = {
         id: _work.name,
         name: _work.name,
-        script: __work.script,
+        path: __work.path,
         instance: __work,
         service: this.name
     };
  
-    //this.works[work.name] = work;
-
-    //console.debug('this.works[work.name]:', this.works[work.name]);
-    //console.debug('Worker created:', work);
-    //console.debug('Worker instance:', work.instance);
-
     work.instance.on('message', (message) => {
   
         let event = message.event,
               data = message.data;
-
-        console.debug('Worker event:', event);
-        console.debug('Worker data:', data);
 
         this.connections.forEach(con => {
             data.event = event;
@@ -84,10 +75,9 @@ Service.prototype.work = function (_work) {
     });
 };
 
-
 Service.prototype.checkAppClientIsAllowed = function (client) {
     return this.allowedClientApps.includes(client);
-} 
+}
 
 Service.connect = connect;
 Service.prototype.function = functionn;
